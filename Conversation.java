@@ -21,6 +21,7 @@ class Conversation implements ConversationRequirements {
   Scanner input;
   ArrayList<String> finalSentence;
   String sentence;
+  Random random;
 
   
   Conversation(){
@@ -28,7 +29,10 @@ class Conversation implements ConversationRequirements {
     outputPronoun = new ArrayList<String>();
     response = new ArrayList<String>();
     finalSentence = new ArrayList<String>();
-    //sentence = input.nextLine();
+    random = new Random();
+    // int min = 0;
+    // int max = 7;
+    //int randomNumber = random.nextInt(max - min +1) + min;
 
     
       inputPronoun.add("I");
@@ -72,25 +76,25 @@ class Conversation implements ConversationRequirements {
     System.out.println("How many rounds?");
     Scanner input = new Scanner(System.in);
     rounds = input.nextInt();
-    //boolean replaced = false;
 
-    for (int i = 1; i <= rounds; i++ ){
+    int min = 0;
+    int max = 7;
+    int randomNumber = random.nextInt(max - min +1) + min;
+
+    for (int i = 0; i < rounds; i++ ){
       
       if(i == 1){
         boolean replaced = false;
         System.out.println("Hi there! What's on your mind?");
+        finalSentence.add("Hi there! What's on your mind?");
         input.nextLine();
 
         sentence = input.nextLine();
-        //System.out.println(sentence); //test
+        finalSentence.add(sentence);
 
         String[] words = sentence.split(" ", -1);
-        //System.out.println(words); //test
         String currResponse= "";
 
-        //System.out.println("length");//test
-        //need if statement to check if answer has been replaced or not
-        System.out.println(words.length); //test
         for(int m = 0; m < words.length; m++){
           for (int j = 0; j < inputPronoun.size(); j++){
             if(words[m].equals(inputPronoun.get(j))){
@@ -103,19 +107,19 @@ class Conversation implements ConversationRequirements {
         }
         finalSentence.add(currResponse); 
         
-        //problem somewhere here
         if(replaced == true){
-          System.out.println("hi");//test
           System.out.println(currResponse);
         } 
         else{
-          System.out.println(response.get((1))); 
+          System.out.println(response.get(randomNumber));
+          finalSentence.add(response.get(randomNumber)); 
         }
         sentence = input.nextLine();
+        finalSentence.add(sentence);
 
       }
       //second round starts here*****************
-      else if (i > 1 && i <= rounds) {
+      else if (i > 1 && i < rounds) {
       boolean replaced = false;
       String currResponse= "";
       String[] words = sentence.split(" ", -1);
@@ -133,26 +137,28 @@ class Conversation implements ConversationRequirements {
         finalSentence.add(currResponse); 
         
         if(replaced == true){
-          System.out.println("hi");//test
           System.out.println(currResponse);
         } 
         else{
-          System.out.println("Hi");//test
-          System.out.println(response.get((1))); 
+          System.out.println(response.get((randomNumber)));
+          finalSentence.add(response.get(randomNumber));
         }
         } 
       }
-      System.out.println("See ya!"); 
+      System.out.println("See ya!");
+      finalSentence.add("See ya!"); 
       input.close();
     }
-  
-      
+
 
   /**
    * Prints transcript of conversation
    */
   public void printTranscript() {
-// **want to try storing all the scanners in an array, then printing the array?
+    System.out.println("Transcript: ");
+    for (int p = 0; p < finalSentence.size(); p++){
+      System.out.println(finalSentence.get(p));
+    }
   }
 
   /**
@@ -169,33 +175,8 @@ class Conversation implements ConversationRequirements {
 
     Conversation myConversation = new Conversation();
     myConversation.chat();
+    System.out.println("\n");
     myConversation.printTranscript();
 
   }
 }
-
-//1. break string sentence into words arraylist(?)
-//2. create empty array list
-//3. for loop{if words[i] matches any of inputPronoun, then change to outputPronoun 
-//add new word to empty array list
-// if the word doesn't match any of inputPronoun, then add original word to empty array list
-//print each item in the array list and should repeat back word
-//if havent replaced anything, return canned response
-
-// String sentence = input.next();
-      // String[] words = sentence.split(" ");
-      // //StringReader punctuation = new StringReader(sentence);
-      
-      // for (int n = 0; n < words.length; n++){
-      //   if(inputPronoun.indexOf(words[n]) != -1){
-      //     words[n] = outputPronoun.get(inputPronoun.indexOf(words[n]));
-      //     System.out.println(words[n]);
-      //   }
-      // }
-      // sentence = String.join(" ", words);
-      // System.out.println(sentence);
-      // System.out.println(words);
-
-      // //for (int k = 0; k < punctuation.length; k++){
-      // //  if()
-      // //}
