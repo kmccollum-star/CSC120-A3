@@ -3,17 +3,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
-
 import javax.sound.sampled.SourceDataLine; 
 
+/**
+   * This class takes user input, returns a mirrored/canned response and stores the transcript
+   * 
+   * @author Kendall McCollum
+   */
 
-class Conversation implements ConversationRequirements {
+   class Conversation implements ConversationRequirements {
 
   // Attributes 
-
-  /**
-   * Constructor 
-   */
   int rounds;
   ArrayList<String> inputPronoun;
   ArrayList<String> outputPronoun;
@@ -23,17 +23,17 @@ class Conversation implements ConversationRequirements {
   String sentence;
   Random random;
 
-  
+  /**
+   * Adds mirrored responses and canned responses to arrays
+   * @param void
+   * @return void
+   */
   Conversation(){
     inputPronoun = new ArrayList<String>();
     outputPronoun = new ArrayList<String>();
     response = new ArrayList<String>();
     finalSentence = new ArrayList<String>();
     random = new Random();
-    // int min = 0;
-    // int max = 7;
-    //int randomNumber = random.nextInt(max - min +1) + min;
-
     
       inputPronoun.add("I");
       inputPronoun.add("Me");
@@ -68,11 +68,10 @@ class Conversation implements ConversationRequirements {
 
   }
 
-  /**
+   /**
    * Starts and runs the conversation with the user
    */
   public void chat() {
-    
     System.out.println("How many rounds?");
     Scanner input = new Scanner(System.in);
     rounds = input.nextInt();
